@@ -49,10 +49,11 @@ namespace RoslynConsole
         [Test]
         public void Methods_ShouldNotHaveTooManyParams()
         {
-            var methods = this.documents.SelectMany(x => x.GetSyntaxRootAsync().Result.DescendantNodes().OfType<MethodDeclarationSyntax>()).ToList();
-            foreach (ParameterListSyntax parameterList in methods.Select(methodDeclarationSyntax => methodDeclarationSyntax.ParameterList))
+            List<MethodDeclarationSyntax> methods = this.documents.SelectMany(x => x.GetSyntaxRootAsync().Result.DescendantNodes().OfType<MethodDeclarationSyntax>()).ToList();
+            foreach (MethodDeclarationSyntax methodDeclarationSyntax in methods)
             {
-                parameterList.Parameters.Count.ShouldBeLessThan(3);
+                var parameterList = methodDeclarationSyntax.ParameterList;
+                parameterList.Parameters.Count.ShouldBeLessThan(15, "File Location: " + methodDeclarationSyntax.Identifier.SyntaxTree.FilePath);
             }
         }
     }
