@@ -1,9 +1,5 @@
-﻿namespace RoslynConsole.NewFolder1
+﻿namespace RoslynConsole.ExampleClass
 {
-    public interface ExampleInterface
-    {
-    }
-
     public class MyExample
     {
         public void MyExampleMethodGood(int var1, int var2)
